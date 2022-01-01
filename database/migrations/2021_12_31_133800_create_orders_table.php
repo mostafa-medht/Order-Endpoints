@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('restaurant_id')->references('id')->on('restaurants');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
