@@ -14,6 +14,9 @@ class OrderRepository implements OrderRepositoryInterface
     public function all($request)
     {
         try {
+            if (!$this->checkAccessibility()) {
+                return $this->returnError("", "Unauthorized");
+            }
             $orders = Order::with('products', 'user', 'restaurant')->get();
             if ($orders)
                 return $this->returnData("orders", $orders);

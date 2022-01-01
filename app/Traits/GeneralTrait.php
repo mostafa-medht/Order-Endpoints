@@ -35,6 +35,12 @@ trait GeneralTrait
         ]);
     } // end of return data
 
+    public function checkAccessibility(): bool
+    {
+        if (\Auth::user())
+            return true;
+        return false;
+    }
     //////////////////
     public function returnValidationError($code = "E001", $validator)
     {
