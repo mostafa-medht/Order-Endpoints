@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Events\NewOrderHasSubmitted;
 use App\Models\Order;
 use App\Services\FirstSMSService;
 use App\Traits\GeneralTrait;
@@ -48,7 +49,7 @@ class OrderRepository implements OrderRepositoryInterface
                     $order->products()->attach($products[$product], ['quantity' => $quantities[$product]]);
                 }
             }
-            FirstSMSService::sendSmsViaNexom('201140805605', "App", 'Order Submitted Succcessfully');
+            event(new NewOrderHasSubmitted($order));
             return $this->returnSuccessMessage("", "Submitted Successfully");
         } catch (\Exception $exception) {
             return $this->returnError("", $exception->getMessage());
