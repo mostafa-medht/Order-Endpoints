@@ -56,6 +56,20 @@ Order Service designed & developed to submit order with products has the followi
         php artisan serve
     ```
 
+    2.6 Use Admin username&password
+
+    ```
+        username : admin1@gmail.com,
+        password : 12345678
+    ```
+
+    2.7 Use User username&password
+
+    ```
+        username : user1@gmail.com,
+        password : 12345678
+    ```
+
 ---
 
 ## Contributing
