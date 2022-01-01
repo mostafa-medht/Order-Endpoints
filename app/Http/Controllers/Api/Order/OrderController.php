@@ -20,7 +20,6 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
-        // $orders = $this->orderRepository->all();
         return $this->orderRepository->all($request);
     }
 

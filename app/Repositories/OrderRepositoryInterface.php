@@ -9,7 +9,7 @@ interface OrderRepositoryInterface
 {
     public function all($request);
 
-    public function submit(SubmitOrder $request);
+    public function submit($request);
 
     public function findById($request);
 
