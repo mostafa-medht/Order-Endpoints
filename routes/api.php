@@ -16,11 +16,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 */
 
 //all routes / api here must be api authenticated
-Route::group(['middleware' => ['api'/*,'checkPassword',*/], 'namespace' => 'Api'], function () {
-    // Route::post('restaurants', 'RestaurantController@index');
-    Route::post('get-category-byId', 'CategoriesController@getCategoryById');
-    Route::post('change-category-status', 'CategoriesController@changeStatus');
-
+Route::group(['middleware' => 'api', 'namespace' => 'Api'], function () {
     Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('login', 'AuthController@login');
 
@@ -42,19 +38,18 @@ Route::group(['middleware' => ['api'/*,'checkPassword',*/], 'namespace' => 'Api'
         });
     });
 
-
     Route::group(['prefix' => 'restaurant', 'middleware' => 'auth.guard:admin-api'], function () {
         // Route::post('restaurants', 'RestaurantController@index');
         Route::post('/restaurants', function () {
-            // return  "user";
-            // $user = JWTAuth::parseToken()->authenticate();
-            // if ((\Auth::user() != $user)) {
-            //     return  response()->json("Error");
-            // } else
-            //     return  response()->json($user);
             if (!\Auth::user())
                 return response()->json("Error");
             return "It's Ok";
         });
+    });
+
+    Route::group(['prefix' => 'orders', 'namespace' => 'Order', 'middleware' => 'auth.guard:api'], function () {
+        Route::post('/', 'OrderController@index');
+        Route::post('/submit', 'OrderController@submit');
+        Route::post('/show', 'OrderController@show');
     });
 });
