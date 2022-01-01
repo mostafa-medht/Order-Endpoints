@@ -34,13 +34,13 @@ class RestaurantController extends Controller
         return $this->restuarantRepository->findById($request);
     }
 
-    public function update($orderId)
+    public function update($request)
     {
-        return $this->restuarantRepository->update($orderId);
+        return $this->restuarantRepository->update($request);
     }
 
-    public function destroy($orderId)
+    public function destroy($request)
     {
-        return $this->restuarantRepository->delete($orderId);
+        return $this->restuarantRepository->delete($request);
     }
 }

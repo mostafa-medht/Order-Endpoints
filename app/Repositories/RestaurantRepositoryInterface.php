@@ -2,9 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Http\Requests\SubmitOrder;
-use Illuminate\Http\Request;
-
 interface RestaurantRepositoryInterface
 {
     public function all($request);

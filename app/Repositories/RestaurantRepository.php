@@ -53,7 +53,7 @@ class RestaurantRepository implements RestaurantRepositoryInterface
             }
             $restaurant = Restaurant::find($request->restaurantId);
             if ($restaurant)
-                return $this->returnData("restaurants", $restaurant);
+                return $this->returnData("restaurant", $restaurant);
             return $this->returnError("", "There is no result");
         } catch (\Exception $exception) {
             return $this->returnError("", $exception->getMessage());
@@ -84,7 +84,12 @@ class RestaurantRepository implements RestaurantRepositoryInterface
 
     public function delete($request)
     {
-        $restaurant = Restaurant::where('id', $request->restaurantId)->delete();
+        try {
+            $restaurant = Restaurant::where('id', $request->restaurantId)->delete();
+            return $this->returnSuccessMessage("", "Deleted Successfully");
+        } catch (\Exception $exception) {
+            return $this->returnError("", $exception->getMessage());
+        }
     }
 
     private function validator($request)
