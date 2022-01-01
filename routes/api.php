@@ -38,15 +38,6 @@ Route::group(['middleware' => 'api', 'namespace' => 'Api'], function () {
         });
     });
 
-    Route::group(['prefix' => 'restaurant', 'middleware' => 'auth.guard:admin-api'], function () {
-        // Route::post('restaurants', 'RestaurantController@index');
-        Route::post('/restaurants', function () {
-            if (!\Auth::user())
-                return response()->json("Error");
-            return "It's Ok";
-        });
-    });
-
     Route::group(['prefix' => 'orders', 'namespace' => 'Order', 'middleware' => 'auth.guard:api'], function () {
         Route::post('/', 'OrderController@index')->middleware(['auth.guard:admin-api']);
         Route::post('/submit', 'OrderController@submit');
@@ -56,5 +47,11 @@ Route::group(['middleware' => 'api', 'namespace' => 'Api'], function () {
     Route::group(['namespace' => 'SMS', 'middleware' => 'auth.guard:api'], function () {
         Route::post('/first_provider', 'SMSController@firstProvider');
         Route::post('/second_provider', 'SMSController@secondProvider');
+    });
+
+    Route::group(['prefix' => 'restaurants', 'namespace' => 'Restaurant', 'middleware' => 'auth.guard:admin-api'], function () {
+        Route::post('/', 'RestaurantController@index');
+        Route::post('/store', 'RestaurantController@store');
+        Route::post('/show', 'RestaurantController@show');
     });
 });
