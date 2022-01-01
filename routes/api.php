@@ -52,4 +52,9 @@ Route::group(['middleware' => 'api', 'namespace' => 'Api'], function () {
         Route::post('/submit', 'OrderController@submit');
         Route::post('/show', 'OrderController@show');
     });
+
+    Route::group(['namespace' => 'SMS', 'middleware' => 'auth.guard:api'], function () {
+        Route::post('/first_provider', 'SMSController@firstProvider');
+        Route::post('/second_provider', 'SMSController@secondProvider');
+    });
 });
