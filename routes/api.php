@@ -54,4 +54,10 @@ Route::group(['middleware' => 'api', 'namespace' => 'Api'], function () {
         Route::post('/store', 'RestaurantController@store');
         Route::post('/show', 'RestaurantController@show');
     });
+
+    Route::group(['prefix' => 'products', 'namespace' => 'Product', 'middleware' => 'auth.guard:admin-api'], function () {
+        Route::post('/', 'ProductController@index');
+        Route::post('/store', 'ProductController@store');
+        Route::post('/show', 'ProductController@show');
+    });
 });
