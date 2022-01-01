@@ -78,7 +78,7 @@ Order Service designed & developed to submit order with products has the followi
 
 ## Resources
 
-1. **JwtAuth** (https://jwt.io/)(https://jwt-auth.readthedocs.io/en/develop/laravel-installation/)
+1. **JwtAuth** (https://jwt-auth.readthedocs.io/en/develop/laravel-installation/)
 
 2. **SMSNexom** (https://github.com/Nexmo/nexmo-laravel)
 
