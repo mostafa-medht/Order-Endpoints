@@ -44,20 +44,19 @@ return [
         'api' => [
             'driver' => 'jwt',
             'provider' => 'users',
+            'hash' => false,
         ],
 
         'user-api' => [
             'driver' => 'jwt',
-            'provider' => 'admins',
+            'provider' => 'users',
         ],
-
         'admin-api' => [
             'driver' => 'jwt',
             'provider' => 'admins',
-        ],
+        ]
 
     ],
-
     /*
     |--------------------------------------------------------------------------
     | User Providers
