@@ -34,17 +34,15 @@ class OrderController extends Controller
         return $order;
     }
 
-    public function update($orderId)
-    {
-        $this->orderRepository->update($orderId);
+    // public function update($orderId)
+    // {
+    //     $this->orderRepository->update($orderId);
 
-        return redirect('/customers/' . $orderId);
-    }
+    //     return redirect('/customers/' . $orderId);
+    // }
 
     public function destroy($orderId)
     {
-        $this->orderRepository->delete($orderId);
-
-        return redirect('/orders');
+        return $this->orderRepository->delete($orderId);
     }
 }

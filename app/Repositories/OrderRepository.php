@@ -29,11 +29,7 @@ class OrderRepository implements OrderRepositoryInterface
 
     public function submit($request)
     {
-        $validator = Validator::make($request->all(), [
-            'restaurant_id' => 'required',
-            'products' => 'required|array',
-            'quantities' => 'required|array',
-        ]);
+        $validator = $this->validator($request);
 
         if ($validator->fails()) {
             $code = $this->returnCodeAccordingToInput($validator);
@@ -72,12 +68,31 @@ class OrderRepository implements OrderRepositoryInterface
 
     public function update($request)
     {
-        $orders = Order::where('id', $request->orderId)->delete();
+        $orders = Order::where('id', $request->orderId)->findOrFail();
         $orders->update(request()->only('name'));
     }
 
     public function delete($request)
     {
+        try {
+            if (!$this->checkAccessibility()) {
+                return $this->returnError("", "Unauthorized");
+            }
+            $orders = Order::where('id', $request->orderId)->delete();
+            return $this->returnSuccessMessage("", "Deleted Successfully");
+        } catch (\Exception $exception) {
+            return $this->returnError("", $exception->getMessage());
+        }
         $orders = Order::where('id', $request->orderId)->firstOrFail();
+    }
+
+    private function validator($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'restaurant_id' => 'required',
+            'products' => 'required|array',
+            'quantities' => 'required|array',
+        ]);
+        return $validator;
     }
 }
