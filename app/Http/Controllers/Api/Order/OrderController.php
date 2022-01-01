@@ -23,6 +23,16 @@ class OrderController extends Controller
         return $this->orderRepository->all($request);
     }
 
+    public function listAcceptedAndRejected(Request $request)
+    {
+        return $this->orderRepository->listAcceptedAndRejected($request);
+    }
+
+    public function updateOrderStatus(Request $request)
+    {
+        return $this->orderRepository->updateOrderStatus($request);
+    }
+
     public function submit(Request $request)
     {
         return $this->orderRepository->submit($request);

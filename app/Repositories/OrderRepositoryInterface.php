@@ -6,7 +6,11 @@ interface OrderRepositoryInterface
 {
     public function all($request);
 
+    public function listAcceptedAndRejected($request);
+
     public function submit($request);
+
+    public function updateOrderStatus($request);
 
     public function findById($request);
 

@@ -40,6 +40,8 @@ Route::group(['middleware' => 'api', 'namespace' => 'Api'], function () {
 
     Route::group(['prefix' => 'orders', 'namespace' => 'Order', 'middleware' => 'auth.guard:api'], function () {
         Route::post('/', 'OrderController@index')->middleware(['auth.guard:admin-api']);
+        Route::post('/updateOrderStatus', 'OrderController@updateOrderStatus')->middleware(['auth.guard:admin-api']);
+        Route::post('/listAcceptedAndRejected', 'OrderController@listAcceptedAndRejected')->middleware(['auth.guard:admin-api']);
         Route::post('/submit', 'OrderController@submit');
         Route::post('/show', 'OrderController@show');
     });

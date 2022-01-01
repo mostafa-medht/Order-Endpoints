@@ -52,6 +52,42 @@ class OrderRepository implements OrderRepositoryInterface
         }
     }
 
+    public function listAcceptedAndRejected($request)
+    {
+        try {
+            if (!$this->checkAccessibility()) {
+                return $this->returnError("", "Unauthorized");
+            }
+            $orders = Order::whereIn("status", ["accepted", "rejected"])
+                ->with('products', 'user', 'restaurant')->get();
+            if ($orders)
+                return $this->returnData("orders", $orders);
+            return $this->returnError("", "There is no result");
+        } catch (\Exception $exception) {
+            return $this->returnError("", $exception->getMessage());
+        }
+    }
+
+    public function updateOrderStatus($request)
+    {
+        try {
+            if (!$this->checkAccessibility()) {
+                return $this->returnError("", "Unauthorized");
+            }
+
+            if ($request->status != "accepted" || $request->status != "accepted") {
+                return $this->returnError("", "Please Send Valid Satus");
+            }
+            $order = Order::find($request->orderId);
+
+            $order->update($request->only('status'));
+
+            return $this->returnSuccessMessage("", "Order Status Updated Successfully");
+        } catch (\Exception $exception) {
+            return $this->returnError("", $exception->getMessage());
+        }
+    }
+
     public function findById($request)
     {
         try {
