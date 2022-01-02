@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
     {
         //create user
         DB::table('users')->insert([
-            'username' => "user1",
+            'name' => "user1",
             'email' => "user1@gmail.com",
             'password' => bcrypt("12345678"),
             'created_at' => new DateTime,
@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
 
         //create user
         DB::table('users')->insert([
-            'username' => "user2",
+            'name' => "user2",
             'email' => "user2@gmail.com",
             'password' => bcrypt("12345678"),
             'created_at' => new DateTime,

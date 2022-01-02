@@ -14,7 +14,7 @@ class AdminSeeder extends Seeder
     {
         //create admin
         DB::table('admins')->insert([
-            'username' => "admin1",
+            'name' => "admin1",
             'password' => bcrypt("12345678"),
             'email' => "admin1@gmail.com",
             'created_at' => new DateTime,
@@ -23,7 +23,7 @@ class AdminSeeder extends Seeder
 
         //create admin
         DB::table('admins')->insert([
-            'username' => "admin2",
+            'name' => "admin2",
             'password' => bcrypt("12345678"),
             'email' => "admin2@gmail.com",
             'created_at' => new DateTime,
